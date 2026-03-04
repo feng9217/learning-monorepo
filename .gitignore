@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Test coverage
+coverage/
+
+# Temporary files
+tmp/
+temp/
+
+# Lock files (keep only root pnpm-lock.yaml)
+packages/apps/*/package-lock.json
+packages/apps/*/yarn.lock
+packages/apps/*/pnpm-lock.yaml

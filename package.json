@@ -1,0 +1,32 @@
+{
+  "name": "learning-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Learning projects monorepo",
+  "type": "module",
+  "scripts": {
+    "dev:bem": "pnpm --filter bem dev",
+    "dev:vite-demo": "pnpm --filter vite-demo dev",
+    "dev:vue3-demo": "pnpm --filter vue-demo dev",
+    "dev": "pnpm -r --parallel run dev",
+    "build": "pnpm -r run build",
+    "build:all": "pnpm -r run build",
+    "lint": "pnpm -r run lint",
+    "lint:fix": "pnpm -r run lint --fix",
+    "format": "prettier --write \"packages/**/*.{ts,tsx,vue,js,json,md}\"",
+    "format:check": "prettier --check \"packages/**/*.{ts,tsx,vue,js,json,md}\"",
+    "test": "pnpm -r run test",
+    "clean": "pnpm -r exec rm -rf node_modules dist",
+    "deps:update": "pnpm -r up --latest"
+  },
+  "devDependencies": {
+    "@vue/tsconfig": "^0.7.0",
+    "prettier": "^3.3.3",
+    "typescript": "~5.6.3"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
+  "packageManager": "pnpm@10.30.3"
+}
