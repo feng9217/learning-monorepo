@@ -183,7 +183,6 @@ const list = [
 
 <style scoped lang="scss">
 .demo-wrapper {
-    height: 920px;
-    max-height: 1880px;
+    height: 1500px;
 }
 </style>

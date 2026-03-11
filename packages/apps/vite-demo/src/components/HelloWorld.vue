@@ -27,6 +27,7 @@ import {
   onDeactivated
 } from 'vue'
 import waterFallFather from './water-fall-father.vue'
+import componentsDemo from './components-demo.vue'
 // ref做深层次响应 shallow做浅层次响应(只到.value)
 // ref底层更新逻辑会调用triggerRef
 // import type { Ref } from 'vue'
@@ -339,6 +340,10 @@ onRenderTriggered((e) => {
   <div>父子传值联系</div>
   <div>------*-------</div>
   <waterFallFather></waterFallFather>
+  <div>------*-------</div>
+  <div>局部组件 全局组件 递归组件</div>
+  <div>------*-------</div>
+  <componentsDemo></componentsDemo>
 </template>
 
 <style scoped>
