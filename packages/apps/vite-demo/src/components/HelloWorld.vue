@@ -1,33 +1,105 @@
+<template>
+  <h1>{{ msg }}</h1>
+
+  <div class="card">
+    <span class="p10 m10 noselect" @click="reduceCount">-</span>
+    <button type="button" class="noselect">count is {{ count }}</button>
+    <span class="p10 m10 noselect" @click="count++">+</span>
+    <p>
+      Edit
+      <code>components/HelloWorld.vue</code> to test HMR
+    </p>
+  </div>
+
+  <p>
+    Check out
+    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank">create-vue</a>, the
+    official Vue + Vite starter
+  </p>
+  <p>
+    Learn more about IDE Support for Vue in the
+    <a href="https://vuejs.org/guide/scaling-up/tooling.html#ide-support" target="_blank">Vue Docs Scaling up Guide</a>.
+  </p>
+  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+  <button @click="change">点我</button>
+  <div>
+    <input type="text" v-model="firstName" />
+    <input type="text" v-model="lastName" />
+  </div>
+  <div>{{ computName }}</div>
+  <button @click="changeName">点我computed</button>
+  <div>------*-------</div>
+  <div>computed练习</div>
+  <div>------*-------</div>
+  <div>
+    <input type="text" placeholder="搜索" v-model="keyWord" />
+  </div>
+  <div style="margin-top: 20px">
+    <table border width="100%" cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th>物品名称</th>
+          <th>物品单价</th>
+          <th>物品数量</th>
+          <th>物品总价</th>
+          <th>物品操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item, index) in searchData">
+          <td align="center">{{ item.name }}</td>
+          <td align="center">{{ item.price }}</td>
+          <td align="center">
+            <button @click="item.num > 1 ? item.num-- : null">-</button>
+            {{ item.num }}
+            <button @click="item.num < 99 ? item.num++ : null">+</button>
+          </td>
+          <td align="center">{{ item.num * item.price }}</td>
+          <td><button @click="del(index)">删除</button></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5" align="right">
+            <!-- 总价: {{ $total }} -->
+            总价: {{ total }}
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div>------*-------</div>
+  <div>watch练习</div>
+  <div>------*-------</div>
+  <div>
+    <input type="text" v-model="message" />
+    <input type="text" v-model="message1" />
+    <div>
+      <button @click="stopWatch">停止监听</button>
+    </div>
+  </div>
+  <div>
+    <input type="text" v-model="message2.foo.bar.name" />
+  </div>
+  <div>------*-------</div>
+  <div>父子传值联系</div>
+  <div>------*-------</div>
+  <waterFallFather></waterFallFather>
+  <div>------*-------</div>
+  <div>局部组件 全局组件 递归组件</div>
+  <div>------*-------</div>
+  <componentsDemo></componentsDemo>
+  <div>------*-------</div>
+  <div>动态组件(多个组件使用同一个挂载点并动态切换)</div>
+  <div>------*-------</div>
+  <dynamicComponent></dynamicComponent>
+</template>
+
 <script setup lang="ts">
-import {
-  ref,
-  isRef,
-  shallowRef,
-  triggerRef,
-  customRef,
-  reactive,
-  readonly,
-  shallowReactive,
-  toRef,
-  toRefs,
-  toRaw,
-  computed,
-  watch,
-  watchEffect,
-  onBeforeMount,
-  onMounted,
-  onBeforeUpdate,
-  onUpdated,
-  onBeforeUnmount,
-  onUnmounted,
-  onErrorCaptured,
-  onRenderTracked,
-  onRenderTriggered,
-  onActivated,
-  onDeactivated
-} from 'vue'
+import { ref, isRef, shallowRef, triggerRef, customRef, reactive, readonly, shallowReactive, toRef, toRefs, toRaw, computed, watch, watchEffect, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, onErrorCaptured, onRenderTracked, onRenderTriggered, onActivated, onDeactivated } from 'vue'
 import waterFallFather from './water-fall-father.vue'
 import componentsDemo from './components-demo.vue'
+import dynamicComponent from './dynamicComponent.vue'
 // ref做深层次响应 shallow做浅层次响应(只到.value)
 // ref底层更新逻辑会调用triggerRef
 // import type { Ref } from 'vue'
@@ -217,7 +289,7 @@ watchEffect(() => {
 })
 
 const stop = watchEffect((onInvalidate) => {
-  onInvalidate(() => {})
+  onInvalidate(() => { })
 })
 
 const stopWatch = () => stop()
@@ -226,20 +298,20 @@ const stopWatch = () => stop()
 // setup语法糖是没有 beforecreate created 可以用 setup 去代替
 
 // 创建
-onBeforeMount(() => {})
+onBeforeMount(() => { })
 // 在此之前是读不到dom的
-onMounted(() => {})
+onMounted(() => { })
 
 // 更新
 // 获取更新前
-onBeforeUpdate(() => {})
+onBeforeUpdate(() => { })
 // 获取更新后
-onUpdated(() => {})
+onUpdated(() => { })
 
 // 卸载(销毁)
-onBeforeUnmount(() => {})
+onBeforeUnmount(() => { })
 
-onUnmounted(() => {})
+onUnmounted(() => { })
 
 // 调试用
 onRenderTracked((e) => {
@@ -251,118 +323,32 @@ onRenderTriggered((e) => {
 })
 </script>
 
-<template>
-  <h1>{{ msg }}</h1>
-
-  <div class="card">
-    <span class="p10 m10 noselect" @click="reduceCount">-</span>
-    <button type="button" class="noselect">count is {{ count }}</button>
-    <span class="p10 m10 noselect" @click="count++">+</span>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
-  </div>
-
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank">create-vue</a>, the
-    official Vue + Vite starter
-  </p>
-  <p>
-    Learn more about IDE Support for Vue in the
-    <a href="https://vuejs.org/guide/scaling-up/tooling.html#ide-support" target="_blank"
-      >Vue Docs Scaling up Guide</a
-    >.
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
-  <button @click="change">点我</button>
-  <div>
-    <input type="text" v-model="firstName" />
-    <input type="text" v-model="lastName" />
-  </div>
-  <div>{{ computName }}</div>
-  <button @click="changeName">点我computed</button>
-  <div>------*-------</div>
-  <div>computed练习</div>
-  <div>------*-------</div>
-  <div>
-    <input type="text" placeholder="搜索" v-model="keyWord" />
-  </div>
-  <div style="margin-top: 20px">
-    <table border width="100%" cellpadding="0" cellspacing="0">
-      <thead>
-        <tr>
-          <th>物品名称</th>
-          <th>物品单价</th>
-          <th>物品数量</th>
-          <th>物品总价</th>
-          <th>物品操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) in searchData">
-          <td align="center">{{ item.name }}</td>
-          <td align="center">{{ item.price }}</td>
-          <td align="center">
-            <button @click="item.num > 1 ? item.num-- : null">-</button>
-            {{ item.num }}
-            <button @click="item.num < 99 ? item.num++ : null">+</button>
-          </td>
-          <td align="center">{{ item.num * item.price }}</td>
-          <td><button @click="del(index)">删除</button></td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="5" align="right">
-            <!-- 总价: {{ $total }} -->
-            总价: {{ total }}
-          </td>
-        </tr>
-      </tfoot>
-    </table>
-  </div>
-  <div>------*-------</div>
-  <div>watch练习</div>
-  <div>------*-------</div>
-  <div>
-    <input type="text" v-model="message" />
-    <input type="text" v-model="message1" />
-    <div>
-      <button @click="stopWatch">停止监听</button>
-    </div>
-  </div>
-  <div>
-    <input type="text" v-model="message2.foo.bar.name" />
-  </div>
-  <div>------*-------</div>
-  <div>父子传值联系</div>
-  <div>------*-------</div>
-  <waterFallFather></waterFallFather>
-  <div>------*-------</div>
-  <div>局部组件 全局组件 递归组件</div>
-  <div>------*-------</div>
-  <componentsDemo></componentsDemo>
-</template>
-
 <style scoped>
 .read-the-docs {
   color: #888;
 }
+
 .p10 {
   padding: 10px;
 }
+
 .m10 {
   margin: 10px;
 }
+
 .noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Chrome/Safari */
-  -khtml-user-select: none; /* Konqueror */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari */
+  -khtml-user-select: none;
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
 </style>
