@@ -93,6 +93,33 @@
   <div>动态组件(多个组件使用同一个挂载点并动态切换)</div>
   <div>------*-------</div>
   <dynamicComponent></dynamicComponent>
+  <div>------*-------</div>
+  <div>插槽(匿名 具名 作用域 动态)</div>
+  <div>------*-------</div>
+  <slotDemo>
+    <template v-slot:header>
+      具名插槽 header
+    </template>
+    <!-- 匿名插槽 -->
+    <!-- <template v-slot>
+      <div>
+        匿名插槽 main
+      </div>
+    </template> -->
+    <!-- 作用域插槽 -->
+    <template v-slot="{ data, index }">
+      <div>{{index}}-{{ data }}</div>
+    </template>
+    <template #footer>
+      <div>
+        具名插槽 footer
+      </div>
+    </template>
+    <!-- 动态插槽 -->
+    <template #[slotName]>
+      <div>我在哪儿</div>
+    </template>
+  </slotDemo>
 </template>
 
 <script setup lang="ts">
@@ -100,6 +127,7 @@ import { ref, isRef, shallowRef, triggerRef, customRef, reactive, readonly, shal
 import waterFallFather from './water-fall-father.vue'
 import componentsDemo from './components-demo.vue'
 import dynamicComponent from './dynamicComponent.vue'
+import slotDemo from './slotDemo.vue'
 // ref做深层次响应 shallow做浅层次响应(只到.value)
 // ref底层更新逻辑会调用triggerRef
 // import type { Ref } from 'vue'
@@ -293,6 +321,9 @@ const stop = watchEffect((onInvalidate) => {
 })
 
 const stopWatch = () => stop()
+
+// 动态插槽
+const slotName = ref('footer')
 
 // 生命周期
 // setup语法糖是没有 beforecreate created 可以用 setup 去代替
